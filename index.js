@@ -106,3 +106,37 @@ function addDepartment(){
     })
 })
 }
+function addRole(){
+    inquirer.prompt([
+        {
+            type:"input",
+            message:"Enter job title",
+            name:'job_title'
+        },
+        {
+            type:"input",
+            message:"Enter job salary",
+            name:'job_salary'
+        },
+        {
+            type:"rawlist",
+            message:"Enter department id",
+            name:'department_id',
+            choices:[
+                {name:"IT",value:1},
+                {name:"Production",value:2},
+                {name:"Design",value:3},
+                {name:"Sales",value:4},
+                {name:"Marketing",value:9},
+            ]
+        },
+
+    ]).then( response => {
+    connection.query(`INSERT INTO roles ( job_title, job_salary,department_id)   VALUES (?,?,?);`,
+    [response.job_title, response.job_salary, response.department_id], function(err,data){
+        if(err) throw err;
+        console.table(data);
+        startApplication();
+    })
+})
+}
