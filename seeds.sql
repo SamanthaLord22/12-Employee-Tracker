@@ -1,9 +1,9 @@
 USE employee_tracker;
--- INSERT INTO departments (department_name)
--- VALUES ("IT"),
---         ("Production"),
---         ("Design"),
---         ("Sales");
+INSERT INTO departments (department_name)
+VALUES ("IT"),
+        ("Production"),
+        ("Design"),
+        ("Sales");
 
 INSERT INTO roles ( job_title, job_salary,department_id)
 VALUES ("IT Manager", 80000,1), 
