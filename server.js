@@ -1,16 +1,40 @@
-const express = require('express');
+
 const mysql = require('mysql2');
+const inquirer = require('inquirer')
 
-const PORT = process.env.PORT || 3001;
-const app = express();
-//express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json()); 
 
-app.use((req, res) => {
-    res.status(404).end();
-});
+function startApplication(){
+    inquirer.prompt([
+        {
+            type:"list",
+            choices:["View all Departments","View all Roles","View all Employees","Update Employee","Add Department","Add Role","Add Employee","Exit Application"],
+            message:"Welcome to CMS",
+            name:"userSelection"
+        }
+    ]).then(userInput => {
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+        switch(userInput.userSelection){
+            case "View all Departments":
+                viewDepartment();
+                break;
+            case "View all Roles":
+                viewRole();
+                break;
+            case "View all Employees":
+                viewEmployee();
+                break;
+            case "Update Employee":
+                    updateEmployee();
+                    break;
+            case "Add Department":
+                        addDepartment();
+                        break;
+                        case "Add Role":
+                            addRole();
+                            break;
+                            case "Add Employee":
+                                addEmployee();
+                                break;
+        }
+    })
+}
