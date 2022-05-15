@@ -140,3 +140,52 @@ function addRole(){
     })
 })
 }
+function addEmployee(){
+    inquirer.prompt([
+        {
+            type:"input",
+            message:"Enter first name",
+            name:'first_name'
+        },
+        {
+            type:"input",
+            message:"Enter last name",
+            name:'last_name'
+        },
+        {
+            type:"rawlist",
+            message:"Enter manager id",
+            name:'manager_id',
+            choices:[
+                {name:"Samantha Lord",value:2},
+                {name:"John Doe",value:1},
+                {name:"Jane Park",value:3},
+                {name:"Jim Peters",value:4}
+            ]
+        },
+        {
+            type:"rawlist",
+            message:"Enter role id",
+            name:'role_id',
+            choices:[
+                {name:"IT Manager",value:1},
+                {name:"FrontEnd developer",value:2},
+                {name:"ackEnd Engineer",value:3},
+                {name:"BackEnd developer",value:4},
+                {name:"Producer Executive",value:5},
+                {name:"Design Executive",value:6},
+                {name:"Sale Executive",value:7},
+                {name:"Jr Designer",value:8}
+            ]
+        }
+
+    ]).then( response => {
+    connection.query(`INSERT INTO employee_data
+    (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);`,
+    [response.first_name, response.last_name, response.role_id, response.manager_id], function(err,data){
+        if(err) throw err;
+        console.table(data);
+        startApplication();
+    })
+})
+}
