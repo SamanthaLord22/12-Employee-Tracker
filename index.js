@@ -90,3 +90,19 @@ function viewEmployee(){
         startApplication();
     })
 }
+function addDepartment(){
+    inquirer.prompt([
+        {
+            type:"input",
+            message:"Enter department name",
+            name:'department_name'
+        }
+    ]).then( response => {
+    connection.query(`INSERT INTO departments (department_name) VALUES (?);`,
+    response.department_name,function(err,data){
+        if(err) throw err;
+        console.table(data);
+        startApplication();
+    })
+})
+}
