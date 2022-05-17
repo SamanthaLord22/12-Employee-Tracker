@@ -12,3 +12,4 @@ left join departments d on d.id = r.department_id
 left join employee_data m on e.manager_id = m.id;
 
  select * from employee_data where manager_id IS NULL;
+ update employee_data set  role_id = 8 where id=1;

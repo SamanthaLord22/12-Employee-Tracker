@@ -189,3 +189,47 @@ function addEmployee(){
     })
 })
 }
+function updateEmployee(){
+    inquirer.prompt([
+       
+        {
+            type:"rawlist",
+            message:"Enter employee id",
+            name:'employee_id',
+            choices:[
+                {name:"John Doe",value:1},
+                {name:"Samantha Lord",value:2},
+                {name:"Jane Park",value:3},
+                {name:"Jim Peters",value:4},
+                {name:"Ellen James",value:5},
+                {name:"Adele Jones",value:6},
+                {name:"Steve Adams",value:7},
+                {name:"Jane Peters",value:8}
+
+            ]
+        },
+        {
+            type:"rawlist",
+            message:"Enter role id",
+            name:'role_id',
+            choices:[
+                {name:"IT Manager",value:1},
+                {name:"FrontEnd developer",value:2},
+                {name:"ackEnd Engineer",value:3},
+                {name:"BackEnd developer",value:4},
+                {name:"Producer Executive",value:5},
+                {name:"Design Executive",value:6},
+                {name:"Sale Executive",value:7},
+                {name:"Jr Designer",value:8}
+            ]
+        }
+
+    ]).then( response => {
+    connection.query(`update employee_data set role_id = ? where id=?;`,
+    [response.role_id, response.employee_id], function(err,data){
+        if(err) throw err;
+        console.table(data);
+        startApplication();
+    })
+})
+}
